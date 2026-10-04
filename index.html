@@ -211,16 +211,13 @@
 
   <section class="card">
     <h2><span class="num">2</span>Installe la protection</h2>
-    <p class="sub">Ton formateur tape un mot de passe de suppression sans te le dire, puis tu télécharges le profil.</p>
-    <label class="field" for="removalPwd">Mot de passe de suppression (tapé par ton formateur)</label>
-    <input type="password" id="removalPwd" autocomplete="new-password" placeholder="••••••••">
-    <div style="margin-top:12px"><button id="downloadBtn">Télécharger le profil N.C.L.B</button></div>
+    <p class="sub">Télécharge le profil, puis valide-le dans Réglages.</p>
+        <div style="margin-top:12px"><button id="downloadBtn">Télécharger le profil N.C.L.B</button></div>
     <p id="dlError" class="result hidden" style="color:var(--bad)"></p>
     <ol class="steps" style="margin-top:12px" data-group="install">
       <li><input type="checkbox"><span>Safari demande l'autorisation de télécharger un profil → <b>Autoriser</b>.</span></li>
       <li><input type="checkbox"><span><span class="path">Réglages</span> → <span class="path">Profil téléchargé</span> (en haut) → <b>Installer</b> → code de l'iPhone → Installer.</span></li>
       <li><input type="checkbox"><span><span class="path">Réglages → Général → VPN et gestion de l'appareil → DNS</span> : vérifier que <b>N.C.L.B</b> est coché.</span></li>
-      <li><input type="checkbox"><span>Vérification du verrou : tente « Supprimer le profil ». Le mot de passe doit être demandé. Sinon, iOS ne l'applique pas sur cet iPhone, et seul Temps d'écran protège.</span></li>
     </ol>
     <div class="note">Rien ne se passe ? App <b>Fichiers</b> → Téléchargements → touche <b>NCLB.mobileconfig</b>.</div>
   </section>
@@ -405,8 +402,7 @@
       if (!/^[a-z0-9]{6}$/.test(id)) throw new Error("Entre l'ID NextDNS (6 caractères) donné par ton formateur, à l'étape 1.");
       serverURL = "https://dns.nextdns.io/" + id + "/NCLB-iPhone";
     }
-    var root = uuid(), dns = uuid(), pwd = uuid();
-    var removal = $("removalPwd").value;
+    var root = uuid(), dns = uuid();
 
     var dnsPayload =
       "<dict>" +
@@ -423,20 +419,11 @@
         "<key>PayloadVersion</key><integer>1</integer>" +
       "</dict>";
 
-    var pwdPayload = removal ?
-      "<dict>" +
-        "<key>PayloadDisplayName</key><string>Verrou de suppression N.C.L.B</string>" +
-        "<key>PayloadIdentifier</key><string>org.nclb.removal." + pwd + "</string>" +
-        "<key>PayloadType</key><string>com.apple.profileRemovalPassword</string>" +
-        "<key>PayloadUUID</key><string>" + pwd + "</string>" +
-        "<key>PayloadVersion</key><integer>1</integer>" +
-        "<key>RemovalPassword</key><string>" + esc(removal) + "</string>" +
-      "</dict>" : "";
 
     return '<?xml version="1.0" encoding="UTF-8"?>\n' +
       '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n' +
       '<plist version="1.0"><dict>' +
-        "<key>PayloadContent</key><array>" + dnsPayload + pwdPayload + "</array>" +
+        "<key>PayloadContent</key><array>" + dnsPayload + "</array>" +
         "<key>PayloadDescription</key><string>Protection N.C.L.B contre les contenus pornographiques, pour toutes les apps. Les VPN restent autorisés.</string>" +
         "<key>PayloadDisplayName</key><string>N.C.L.B (No.Child.Left.Behind)</string>" +
         "<key>PayloadIdentifier</key><string>org.nclb.profile." + root + "</string>" +
