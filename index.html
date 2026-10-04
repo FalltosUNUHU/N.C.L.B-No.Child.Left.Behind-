@@ -140,24 +140,47 @@
 
     <div id="afterInstall" class="hidden" style="margin-top:16px">
       <ol class="simple">
-        <li>Touche <b>Autoriser</b> si Safari le demande.</li>
-        <li>Ouvre <span class="path">Réglages</span> → touche <span class="path">Profil téléchargé</span> tout en haut → <b>Installer</b>.</li>
+        <li>Touche <b>Allow</b> si Safari le demande.</li>
+        <li>Ouvre <span class="path">Settings</span> → touche <span class="path">Profile Downloaded</span> tout en haut → <b>Install</b>.</li>
         <li>Reviens ici et touche <b>Vérifier à nouveau</b>.</li>
       </ol>
     </div>
   </section>
 
-  <!-- VERROUILLAGE -->
+  <!-- VERROUILLAGE + APPS TOR -->
   <section class="card">
     <details id="lockDetails">
-      <summary>Verrouiller avec ton formateur</summary>
+      <summary>Verrouiller et bloquer Tor</summary>
       <div>
-        <p class="muted">À faire une seule fois, avec ton formateur à côté de toi. Dans <span class="path">Réglages → Temps d'écran → Contenu et confidentialité</span> :</p>
+        <p class="muted"><b>Important :</b> aucun filtre ne peut voir à l'intérieur d'un navigateur Tor (Onion Browser, Orbot, OrNet…). La seule protection contre le dark web, c'est qu'aucune app Tor ne soit sur l'iPhone.</p>
+        <p class="muted">À faire une seule fois, avec ton formateur à côté de toi :</p>
         <ol class="simple">
-          <li>Active l'interrupteur <b>Contenu et confidentialité</b>.</li>
-          <li><span class="path">Restrictions de l'App Store</span> → <span class="path">Contenu web</span> → <b>Limiter les sites pour adultes</b>.</li>
-          <li><span class="path">Achats dans l'App Store</span> → <span class="path">Installation d'apps</span> → <b>Ne pas autoriser</b>. Plus aucune app Tor, dark web ou de rencontre ne peut être téléchargée.</li>
-          <li>Retour à Temps d'écran → <b>Utiliser un code Temps d'écran</b> : <b>ton formateur</b> le tape et le garde.</li>
+          <li><b>Supprime toute app Tor</b> : appui long sur l'icône → <span class="path">Remove App</span> → <span class="path">Delete App</span>. Cherche aussi les apps avec « Tor », « Onion » ou « Dark » dans le nom.</li>
+          <li><span class="path">Settings → Screen Time → Content &amp; Privacy Restrictions</span> → active l'interrupteur.</li>
+          <li><span class="path">App Store, Media, Web &amp; Games → Web Content</span> → <b>Limit Adult Websites</b>.</li>
+          <li>Même écran → <span class="path">Apps</span> → choisis la limite <b>juste en dessous de la plus haute</b>. Les navigateurs Tor sont masqués, même s'ils sont réinstallés.</li>
+          <li><span class="path">App Store Purchases → Installing Apps</span> → <b>Don't Allow</b>. Plus aucune app Tor, dark web ou de rencontre ne peut être téléchargée.</li>
+          <li>Retour à Screen Time → <span class="path">Lock Screen Time Settings</span> (ou « Use Screen Time Passcode ») : <b>ton formateur</b> tape le code et le garde.</li>
+        </ol>
+        <p class="muted" style="margin-top:10px">Pour installer une nouvelle app plus tard, ton formateur remet <b>Installing Apps → Allow</b> avec son code, puis le remet sur <b>Don't Allow</b>.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- NORDVPN -->
+  <section class="card">
+    <details id="vpnDetails">
+      <summary>Garder la protection avec NordVPN</summary>
+      <div>
+        <p class="muted">Quand un VPN est connecté, il remplace le filtre N.C.L.B. Ce réglage unique, fait par ton formateur, fait passer NordVPN par N.C.L.B : blocage et journal continuent avec le VPN.</p>
+        <ol class="simple">
+          <li><b>Dans NextDNS</b> : <span class="path">Setup → Linked IP</span>. Note l'<b>adresse IPv4</b> et copie l'<b>update URL</b>.</li>
+          <li><b>Dans NordVPN</b> : désactive <b>Threat Protection</b> (ou « Real-time protection »).</li>
+          <li><span class="path">Settings → Custom DNS</span> → active <b>Use custom DNS</b> et entre l'adresse IPv4 de NextDNS.</li>
+          <li><b>Dans l'app Shortcuts</b> : <span class="path">Automation → +</span> → <span class="path">App</span> → <b>NordVPN</b> → coche <b>Is Closed</b> → <b>Run Immediately</b> → <b>Next</b>.</li>
+          <li>Touche <b>Create New Shortcut</b>, cherche <b>Get Contents of URL</b>, touche le mot bleu <b>URL</b>, colle l'update URL → <b>Done</b>.</li>
+          <li>Connecte toujours NordVPN au <b>même serveur</b> (pas « Quick Connect »), puis ferme l'app : le raccourci relie automatiquement le VPN à N.C.L.B.</li>
+          <li>Vérifie : VPN connecté, ouvre cette page. Elle doit afficher <b>Protection active</b>.</li>
         </ol>
       </div>
     </details>
@@ -196,9 +219,10 @@
       <summary>Ça ne marche pas ?</summary>
       <div>
         <ol class="simple">
-          <li><span class="path">Réglages → Général → VPN et gestion de l'appareil → DNS</span> : choisis <b>N.C.L.B</b>.</li>
-          <li><span class="path">Réglages → ton nom → iCloud → Relais privé</span> : désactive-le.</li>
-          <li>Déconnecte ton VPN, active puis désactive le mode Avion, et touche <b>Vérifier à nouveau</b>.</li>
+          <li><span class="path">Settings → General → VPN &amp; Device Management → DNS</span> : choisis <b>N.C.L.B</b>.</li>
+          <li><span class="path">Settings → ton nom → iCloud → Private Relay</span> : désactive-le.</li>
+          <li>Si un VPN est connecté : suis « Garder la protection avec NordVPN », ou déconnecte-le pour vérifier.</li>
+          <li>Active puis désactive le mode Avion, et touche <b>Vérifier à nouveau</b>.</li>
         </ol>
       </div>
     </details>
