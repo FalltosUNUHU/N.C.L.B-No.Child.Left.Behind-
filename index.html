@@ -148,20 +148,16 @@
 
   <section class="card">
     <h2>Ce que fait N.C.L.B</h2>
-    <p class="sub">Plusieurs couches de protection. Chaque limite est écrite honnêtement.</p>
+    <p class="sub">Plusieurs couches de protection, qui se renforcent les unes les autres.</p>
     <ul class="status">
       <li class="ok">Sites pornographiques bloqués dans <b>toutes les apps</b> (filtre DNS NextDNS).</li>
       <li class="ok">t.me / Telegram bloqué.</li>
       <li class="ok"><b>Reddit et X restent accessibles</b>, avec leur contenu NSFW masqué (étape 4).</li>
-      <li class="ok" data-show="dating strict">Apps de rencontre : <b>impossibles à télécharger</b>, et leurs sites et serveurs sont bloqués.</li>
-      <li class="mid" data-show="dating apps">Apps de rencontre : leurs sites et serveurs sont bloqués, mais <b>le téléchargement reste possible</b> dans ce mode.</li>
-      <li class="ok" data-show="strict">Tor et <b>.onion</b> : les apps Tor ne peuvent ni être installées ni ouvertes.</li>
-      <li class="mid" data-show="apps">Tor et <b>.onion</b> : les adresses .onion sont bloquées, mais les apps Tor restent installables dans ce mode.</li>
+      <li class="ok"><b>Téléchargement d'apps verrouillé</b> : aucune app ne peut être installée sans le code de ton formateur. Navigateurs Tor, apps dark web<span data-show="dating"> et apps de rencontre</span> : impossibles à télécharger.</li>
+      <li class="ok"><b>.onion</b> : inaccessibles. Ces adresses ne fonctionnent qu'à travers une app Tor, et aucune ne peut être installée.</li>
+      <li class="ok" data-show="dating">Sites de rencontre bloqués par le filtre.</li>
       <li class="ok">Journal des sites bloqués, consultable à distance par ton formateur.</li>
-      <li class="ok">Les VPN restent autorisés.</li>
-      <li class="mid">Reddit et X : le NSFW est masqué par leurs propres réglages, et par le filtre de Safari si tu les utilises dans Safari, mais <b>pas à 100 %</b>. Un filtre réseau ne voit que « reddit.com », pas la page ouverte.</li>
-      <li class="mid">Avec un VPN connecté, Safari reste filtré (Temps d'écran) mais <b>le journal ne voit plus rien</b>.</li>
-      <li class="mid">La fiabilité dépend de ton formateur : c'est lui qui garde les codes et le compte NextDNS.</li>
+      <li class="ok">Les VPN restent autorisés. Pour en installer un nouveau, ton formateur déverrouille le téléchargement le temps de l'installer.</li>
     </ul>
   </section>
 
@@ -178,12 +174,12 @@
       <label class="option">
         <input type="radio" name="mode" value="strict" checked>
         <b>Dans Safari uniquement<span class="tag">Le plus sûr</span></b>
-        <span>Les apps notées 17+/18+ deviennent impossibles à télécharger : rencontres, Tor, Telegram… mais aussi les apps Reddit et X, qui ont la même note. Dans Safari, le filtre d'Apple analyse chaque page et masque davantage de NSFW.</span>
+        <span>En plus du verrou de téléchargement, les apps 17+/18+ déjà installées sont masquées, y compris les apps Reddit et X. Dans Safari, le filtre d'Apple analyse chaque page et masque davantage de NSFW.</span>
       </label>
       <label class="option">
         <input type="radio" name="mode" value="apps">
         <b>Garder les apps Reddit et X</b>
-        <span>Moins sûr : iOS ne sait pas autoriser Reddit et X sans autoriser toutes les apps 17+/18+. Les apps de rencontre et Tor redeviennent téléchargeables. Le filtre DNS bloque quand même les rencontres, sauf quand un VPN est connecté.</span>
+        <span>Installe Reddit et X <b>avant</b> d'activer le verrou. Ensuite, aucune nouvelle app (Tor, rencontres…) ne peut être téléchargée sans ton formateur.</span>
       </label>
     </div>
   </section>
@@ -200,7 +196,7 @@
       <li><input type="checkbox"><span>Onglet <span class="path">Setup</span> : noter l'<b>ID</b> (6 caractères) et te le donner.</span></li>
     </ol>
     <div class="chips" id="denylist"></div>
-    <div class="note"><code>onion</code> bloque toute adresse se terminant par .onion. <code>redgifs.com</code> héberge une grande partie des vidéos NSFW partagées sur Reddit : le bloquer les rend illisibles, même dans l'app Reddit. Reddit et X ne sont <b>pas</b> dans la liste : ils restent accessibles.</div>
+    <div class="note">Seulement 5 domaines. Les sites de rencontre sont bloqués par la catégorie <b>Dating</b>, sans rien taper. <b>.onion</b> : NextDNS refuse cette entrée car ce n'est pas une extension Internet. Ces adresses ne passent jamais par le DNS, seulement par une app Tor, et c'est le verrou de téléchargement (étape 3) qui les rend impossibles. <code>redgifs.com</code> héberge une grande partie des vidéos NSFW partagées sur Reddit : le bloquer les rend illisibles, même dans l'app Reddit. Reddit et X ne sont <b>pas</b> dans la liste : ils restent accessibles.</div>
 
     <label class="field" for="nextdnsId">ID NextDNS donné par ton formateur</label>
     <input type="text" id="nextdnsId" maxlength="6" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="a1b2c3">
@@ -208,7 +204,7 @@
     <details>
       <summary>Pas de formateur avec NextDNS ? Filtre de secours sans compte</summary>
       <p class="sub" style="margin-top:8px">Moins complet : pas de journal, et ni t.me ni les sites de rencontre ne seront bloqués par ce filtre. Temps d'écran (étape 3) pourra les bloquer dans Safari.</p>
-      <label class="option"><input type="radio" name="provider" value="nextdns" checked><b>NextDNS (recommandé)</b><span>Journal, liste perso, .onion.</span></label>
+      <label class="option"><input type="radio" name="provider" value="nextdns" checked><b>NextDNS (recommandé)</b><span>Journal, liste perso, rencontres.</span></label>
       <label class="option" style="margin-top:8px"><input type="radio" name="provider" value="cleanbrowsing"><b>CleanBrowsing Adult</b><span>Porno bloqué, recherche sécurisée forcée. Sans compte.</span></label>
     </details>
   </section>
@@ -235,14 +231,15 @@
     <ol class="steps" data-group="screentime">
       <li><input type="checkbox"><span><span class="path">Réglages → Temps d'écran</span> → activer. Puis <span class="path">Contenu et confidentialité</span> → activer l'interrupteur.</span></li>
       <li data-show="strict"><input type="checkbox"><span><span class="path">Restrictions de l'App Store et d'iTunes</span> (ou « Restrictions de contenu ») → <b>Apps</b> → choisir la limite <b>juste en dessous de la plus haute</b> (16+ ou 12+ selon la version d'iOS). Les apps 17+/18+ (rencontres, Tor, Telegram, apps Reddit et X) disparaissent et ne peuvent plus être téléchargées.</span></li>
-      <li data-show="apps"><input type="checkbox"><span><span class="path">Restrictions de l'App Store et d'iTunes</span> → <b>Apps</b> : laisser <b>toutes les apps</b> autorisées, pour garder Reddit et X.</span></li>
+      <li data-show="apps"><input type="checkbox"><span><span class="path">Restrictions de l'App Store et d'iTunes</span> → <b>Apps</b> : laisser <b>toutes les apps</b> autorisées, pour garder Reddit et X (déjà installées).</span></li>
+      <li><input type="checkbox"><span><span class="path">Contenu et confidentialité → Achats dans l'iTunes et l'App Store</span> → <b>Installation d'apps → Ne pas autoriser</b>. C'est le verrou qui rend impossible le téléchargement de navigateurs Tor et d'apps dark web.</span></li>
       <li><input type="checkbox"><span>Même écran → <b>Contenu web</b> → <b>Limiter les sites pour adultes</b>.</span></li>
-      <li><input type="checkbox"><span>Sous <b>Ne jamais autoriser</b>, ajouter : <code>t.me</code>, <code>telegram.org</code>, <code>torproject.org</code>, <code>redgifs.com</code><span data-show="dating">, <code>tinder.com</code>, <code>bumble.com</code>, <code>hinge.co</code>, <code>grindr.com</code>, <code>badoo.com</code>, <code>meetic.be</code></span>.</span></li>
-      <li><input type="checkbox"><span>Laisser « Applications VPN » <b>autorisées</b> : tes VPN continuent de fonctionner.</span></li>
+      <li><input type="checkbox"><span>Sous <b>Ne jamais autoriser</b>, ajouter : <code>t.me</code>, <code>telegram.org</code>, <code>torproject.org</code>, <code>redgifs.com</code>.</span></li>
+      <li><input type="checkbox"><span>Laisser « Applications VPN » <b>autorisées</b> : tes VPN déjà installés continuent de fonctionner.</span></li>
       <li><input type="checkbox"><span>Retour à Temps d'écran → <b>Utiliser un code Temps d'écran</b> : <b>ton formateur</b> le tape et le garde.</span></li>
     </ol>
-    <div class="note" data-show="strict">Vérifie après réglage : l'App Store ne doit plus proposer Tinder, Onion Browser ni Telegram. Les notes d'âge peuvent changer : si une app de ce type apparaît encore, dis-le à ton formateur.</div>
-    <div class="note bad" data-show="apps">Dans ce mode, rien n'empêche de <b>télécharger</b> une app de rencontre ou une app Tor. Le filtre DNS les empêche de fonctionner, mais seulement quand aucun VPN n'est connecté.</div>
+    <div class="note"><b>Installer une nouvelle app plus tard</b> (un VPN, par exemple) : ton formateur va dans Installation d'apps → Autoriser avec son code, tu installes l'app, puis il remet <b>Ne pas autoriser</b>. Il voit ainsi chaque app installée.</div>
+    <div class="note"><b>Vérification</b> : ouvre l'App Store et essaie de télécharger n'importe quelle app gratuite. Le bouton doit être bloqué. Sinon, le verrou n'est pas actif.</div>
   </section>
 
   <section class="card">
@@ -300,16 +297,7 @@
 (function () {
   "use strict";
 
-  var DENY_BASE = [
-    "onion", "onion.ly", "onion.ws", "onion.to", "onion.pet", "torproject.org",
-    "t.me", "telegram.me", "telegram.org", "telegram.dog", "telesco.pe", "tdesktop.com",
-    "redgifs.com"
-  ];
-  var DENY_DATING = [
-    "tinder.com", "gotinder.com", "bumble.com", "bumble.app", "hinge.co", "grindr.com", "grindr.net",
-    "badoo.com", "happn.com", "meetic.be", "meetic.fr", "okcupid.com", "match.com", "feeld.co",
-    "lovoo.com", "adopteunmec.com", "tantanapp.com", "jaumo.com"
-  ];
+  var DENY_BASE = ["t.me", "telegram.org", "telegram.me", "redgifs.com", "torproject.org"];
 
   var PROVIDERS = {
     nextdns:       { name: "NextDNS",             url: null, ips: [] },
@@ -356,7 +344,7 @@
   function renderChips() {
     var chips = $("denylist");
     chips.innerHTML = "";
-    DENY_BASE.concat(opts.dating ? DENY_DATING : []).forEach(function (d) {
+    DENY_BASE.forEach(function (d) {
       var b = document.createElement("button");
       b.type = "button"; b.className = "chip"; b.textContent = d;
       b.addEventListener("click", function () {
@@ -433,7 +421,6 @@
         "<key>PayloadType</key><string>com.apple.dnsSettings.managed</string>" +
         "<key>PayloadUUID</key><string>" + dns + "</string>" +
         "<key>PayloadVersion</key><integer>1</integer>" +
-        "<key>ProhibitDisablement</key><true/>" +
       "</dict>";
 
     var pwdPayload = removal ?
