@@ -30,10 +30,25 @@
     -webkit-text-size-adjust: 100%;
     padding-bottom: env(safe-area-inset-bottom);
   }
+
+  /* Langue et appareil : on n'affiche que le bloc correspondant */
+  body.lang-fr [data-lang="en"], body.lang-en [data-lang="fr"] { display: none !important; }
+  body.dev-phone [data-device="computer"], body.dev-computer [data-device="phone"] { display: none !important; }
+
   header {
-    background: var(--gold); text-align: center;
+    background: var(--gold); text-align: center; position: relative;
     padding: calc(34px + env(safe-area-inset-top)) 16px 46px;
   }
+  .langs {
+    position: absolute; top: calc(12px + env(safe-area-inset-top)); right: 12px;
+    display: flex; background: rgba(255,255,255,.28); border-radius: 99px; padding: 3px;
+  }
+  .langs button {
+    width: auto; padding: 6px 12px; font: 700 13px Inter, sans-serif; letter-spacing: 1px;
+    background: transparent; color: var(--white); border-radius: 99px;
+    text-shadow: 0 1px 2px rgba(120, 90, 0, .45);
+  }
+  .langs button.on { background: var(--white); color: var(--gold-deep); text-shadow: none; }
   .brand {
     font-family: Cinzel, Didot, Georgia, serif; color: var(--white);
     margin: 0; font-size: 46px; font-weight: 700; letter-spacing: 7px; line-height: 1;
@@ -44,70 +59,83 @@
     font-size: 14px; letter-spacing: 4px; text-shadow: 0 1px 2px rgba(120, 90, 0, .45);
   }
   .crest { display: block; margin: 0 auto 14px; filter: drop-shadow(0 1px 2px rgba(120, 90, 0, .4)); }
+
   main { max-width: 560px; margin: -26px auto 0; padding: 0 16px; }
   .card {
     background: var(--white); border: 1px solid var(--line); border-radius: 20px;
     padding: 22px 18px; margin: 0 0 16px; box-shadow: 0 2px 12px rgba(168, 134, 10, .08);
   }
   h2 { margin: 0 0 6px; font-size: 21px; }
+  h3 { margin: 16px 0 6px; font-size: 17px; }
   p { margin: 0 0 12px; }
   .muted { color: var(--muted); font-size: 15px; }
+
+  .devices { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: var(--gold-soft); border-radius: 18px; padding: 5px; margin: 0 0 16px; }
+  .devices button {
+    background: transparent; color: var(--muted); font-size: 16px; padding: 12px 8px; border-radius: 14px;
+  }
+  .devices button.on { background: var(--white); color: var(--ink); box-shadow: 0 1px 6px rgba(168, 134, 10, .18); }
+
   .status { text-align: center; }
   .status .icon { font-size: 56px; line-height: 1; margin-bottom: 8px; }
   .status h2 { font-size: 24px; }
   .status.ok h2 { color: var(--good); }
   .status.off h2 { color: var(--bad); }
+
   button, .btn {
     display: block; width: 100%; text-align: center; text-decoration: none;
     font: 700 18px Inter, -apple-system, sans-serif; border: 0; border-radius: 16px;
     padding: 17px 16px; background: var(--gold); color: var(--ink); cursor: pointer;
   }
-  .btn.secondary, button.secondary {
+  button.secondary {
     background: var(--white); color: var(--gold-deep); border: 2px solid var(--gold);
     font-size: 16px; padding: 13px 16px;
   }
-  button + button, .btn + .btn, button + .btn { margin-top: 10px; }
+  button + button { margin-top: 10px; }
   input[type=text] {
     width: 100%; font: 600 22px ui-monospace, Menlo, monospace; text-align: center; letter-spacing: 4px;
     padding: 14px; border-radius: 14px; border: 2px solid var(--line); color: var(--ink); background: var(--white);
     margin-bottom: 12px;
   }
   input:focus { outline: none; border-color: var(--gold); }
+
   ol.simple { margin: 0; padding: 0; list-style: none; counter-reset: n; }
-  ol.simple li { counter-increment: n; position: relative; padding: 10px 0 10px 42px; border-top: 1px solid var(--line); }
-  ol.simple li:first-child { border-top: 0; }
-  ol.simple li::before {
+  ol.simple > li { counter-increment: n; position: relative; padding: 10px 0 10px 42px; border-top: 1px solid var(--line); }
+  ol.simple > li:first-child { border-top: 0; }
+  ol.simple > li::before {
     content: counter(n); position: absolute; left: 0; top: 9px; width: 28px; height: 28px; border-radius: 50%;
     background: var(--gold); font: 700 15px Cinzel, Georgia, serif; display: grid; place-items: center;
   }
   .path { font-weight: 700; }
-  details { border-top: 1px solid var(--line); padding-top: 12px; margin-top: 4px; }
-  details:first-of-type { border-top: 0; padding-top: 0; margin-top: 0; }
-  summary { font-weight: 700; font-size: 18px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
-  summary::-webkit-details-marker { display: none; }
-  summary::after { content: "＋"; color: var(--gold-deep); font-size: 22px; }
-  details[open] summary::after { content: "－"; }
+  details > summary { font-weight: 700; font-size: 18px; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  details > summary::-webkit-details-marker { display: none; }
+  details > summary::after { content: "＋"; color: var(--gold-deep); font-size: 22px; flex: none; }
+  details[open] > summary::after { content: "－"; }
   details > div { padding-top: 10px; }
+  .note { border-left: 4px solid var(--gold); background: var(--gold-soft); padding: 10px 12px; border-radius: 0 12px 12px 0; font-size: 15px; margin: 0 0 12px; }
+
   .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 4px; }
   .chip {
     font: 600 15px ui-monospace, Menlo, monospace; background: var(--gold-soft); border: 1px solid var(--line);
-    border-radius: 99px; padding: 7px 12px; color: var(--ink); cursor: pointer; width: auto;
+    border-radius: 99px; padding: 7px 12px; color: var(--ink); cursor: pointer; width: auto; margin: 0 !important;
   }
   .chip.copied { background: var(--gold); }
-  .linkbox {
-    font: 14px ui-monospace, Menlo, monospace; background: var(--gold-soft); border-radius: 12px;
-    padding: 12px; word-break: break-all; margin: 10px 0;
-  }
+  .linkbox { font: 14px ui-monospace, Menlo, monospace; background: var(--gold-soft); border-radius: 12px; padding: 12px; word-break: break-all; margin: 10px 0; }
   .hidden { display: none !important; }
   .err { color: var(--bad); font-weight: 600; }
   a { color: var(--gold-deep); font-weight: 700; }
-  footer { text-align: center; color: var(--muted); font-size: 13px; padding: 10px 16px 44px; }
-  footer b { font-family: Cinzel, Georgia, serif; color: var(--gold-deep); letter-spacing: 3px; font-weight: 700; }
+  footer { text-align: center; color: var(--muted); font-size: 13px; padding: 10px 16px 44px; line-height: 1.7; }
+  footer .mark { font-family: Cinzel, Georgia, serif; color: var(--gold-deep); letter-spacing: 3px; font-weight: 700; font-size: 15px; }
+  footer .credit { font-family: Cinzel, Georgia, serif; letter-spacing: 1.5px; color: var(--ink); }
 </style>
 </head>
-<body>
+<body class="lang-fr dev-phone">
 
 <header>
+  <div class="langs" role="group" aria-label="Langue / Language">
+    <button type="button" data-set-lang="fr">FR</button>
+    <button type="button" data-set-lang="en">EN</button>
+  </div>
   <svg class="crest" width="58" height="58" viewBox="0 0 48 48" aria-hidden="true">
     <path d="M24 3 6 10v12c0 11 7.7 20.6 18 23 10.3-2.4 18-12 18-23V10L24 3z" fill="#fff" opacity=".22"/>
     <path d="M24 3 6 10v12c0 11 7.7 20.6 18 23 10.3-2.4 18-12 18-23V10L24 3z" fill="none" stroke="#fff" stroke-width="2.2"/>
@@ -119,96 +147,211 @@
 
 <main>
 
-  <!-- ÉTAT DE LA PROTECTION (vérifié automatiquement) -->
+  <!-- ÉTAT -->
   <section class="card status" id="statusCard">
     <div class="icon" id="statusIcon">⏳</div>
-    <h2 id="statusTitle">Vérification…</h2>
-    <p class="muted" id="statusText">N.C.L.B vérifie si la protection est active sur cet appareil.</p>
-    <button class="secondary" id="recheck">Vérifier à nouveau</button>
+    <h2 id="statusTitle"></h2>
+    <p class="muted" id="statusText"></p>
+    <button class="secondary" id="recheck"><span data-lang="fr">Vérifier à nouveau</span><span data-lang="en">Check again</span></button>
   </section>
 
-  <!-- INSTALLATION (utilisateur) -->
+  <!-- CHOIX DE L'APPAREIL -->
+  <div class="devices" role="group">
+    <button type="button" data-set-device="phone">📱 <span data-lang="fr">Téléphone</span><span data-lang="en">Phone</span></button>
+    <button type="button" data-set-device="computer">💻 <span data-lang="fr">Ordinateur</span><span data-lang="en">Computer</span></button>
+  </div>
+
+  <!-- INSTALLATION -->
   <section class="card" id="installCard">
-    <h2>Installer la protection</h2>
+    <h2><span data-lang="fr">Installer la protection</span><span data-lang="en">Install the protection</span></h2>
+
+    <div data-device="computer">
+      <p class="muted" style="margin-bottom:6px"><b>Mac</b></p>
+    </div>
+
     <div id="noId">
-      <p class="muted">Entre le code à 6 caractères donné par ton formateur.</p>
+      <p class="muted"><span data-lang="fr">Entre le code à 6 caractères donné par ton formateur.</span><span data-lang="en">Enter the 6-character code given by your trainer.</span></p>
       <input type="text" id="idInput" maxlength="6" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="a1b2c3">
     </div>
-    <p id="hasId" class="muted hidden">Code de ton formateur : <b id="idShown"></b></p>
-    <button id="installBtn">Installer N.C.L.B</button>
+    <p id="hasId" class="muted hidden"><span data-lang="fr">Code de ton formateur :</span><span data-lang="en">Your trainer's code:</span> <b id="idShown"></b></p>
+    <button id="installBtn"><span data-lang="fr">Installer N.C.L.B</span><span data-lang="en">Install N.C.L.B</span></button>
     <p class="err hidden" id="installErr" style="margin-top:10px"></p>
 
-    <div id="afterInstall" class="hidden" style="margin-top:16px">
-      <ol class="simple">
-        <li>Touche <b>Allow</b> si Safari le demande.</li>
-        <li>Ouvre <span class="path">Settings</span> → touche <span class="path">Profile Downloaded</span> tout en haut → <b>Install</b>.</li>
+    <div id="afterInstall" style="margin-top:16px">
+      <!-- iPhone -->
+      <ol class="simple" data-device="phone" data-lang="fr">
+        <li>Touche <b>Autoriser</b> si Safari le demande.</li>
+        <li>Ouvre <span class="path">Réglages</span> → touche <span class="path">Profil téléchargé</span> tout en haut → <b>Installer</b>.</li>
         <li>Reviens ici et touche <b>Vérifier à nouveau</b>.</li>
       </ol>
+      <ol class="simple" data-device="phone" data-lang="en">
+        <li>Tap <b>Allow</b> if Safari asks.</li>
+        <li>Open <span class="path">Settings</span> → tap <span class="path">Profile Downloaded</span> at the top → <b>Install</b>.</li>
+        <li>Come back here and tap <b>Check again</b>.</li>
+      </ol>
+      <!-- Mac -->
+      <ol class="simple" data-device="computer" data-lang="fr">
+        <li>Ouvre cette page dans <b>Safari</b> sur le Mac, puis clique sur <b>Installer N.C.L.B</b>.</li>
+        <li>Double-clique sur <b>NCLB.mobileconfig</b> dans <span class="path">Téléchargements</span>.</li>
+        <li><span class="path">Réglages Système → Confidentialité et sécurité → Profils</span> (ou <span class="path">Général → Gestion des appareils</span>) → double-clique sur <b>N.C.L.B</b> → <b>Installer</b>.</li>
+        <li>Recharge cette page : elle doit afficher <b>Protection active</b>.</li>
+      </ol>
+      <ol class="simple" data-device="computer" data-lang="en">
+        <li>Open this page in <b>Safari</b> on the Mac, then click <b>Install N.C.L.B</b>.</li>
+        <li>Double-click <b>NCLB.mobileconfig</b> in <span class="path">Downloads</span>.</li>
+        <li><span class="path">System Settings → Privacy &amp; Security → Profiles</span> (or <span class="path">General → Device Management</span>) → double-click <b>N.C.L.B</b> → <b>Install</b>.</li>
+        <li>Reload this page: it should show <b>Protection active</b>.</li>
+      </ol>
+    </div>
+
+    <div data-device="computer">
+      <h3>Windows</h3>
+      <ol class="simple" data-lang="fr">
+        <li>Télécharge l'app officielle <b>NextDNS pour Windows</b> sur <a href="https://nextdns.io" target="_blank" rel="noopener">nextdns.io</a>.</li>
+        <li>Installe-la et entre le <b>code de ton formateur</b> (Configuration ID).</li>
+        <li>Recharge cette page : elle doit afficher <b>Protection active</b>.</li>
+      </ol>
+      <ol class="simple" data-lang="en">
+        <li>Download the official <b>NextDNS app for Windows</b> from <a href="https://nextdns.io" target="_blank" rel="noopener">nextdns.io</a>.</li>
+        <li>Install it and enter your <b>trainer's code</b> (Configuration ID).</li>
+        <li>Reload this page: it should show <b>Protection active</b>.</li>
+      </ol>
+      <h3><span data-lang="fr">Navigateurs</span><span data-lang="en">Browsers</span></h3>
+      <p class="muted" data-lang="fr">Chrome et Firefox peuvent contourner le filtre avec leur propre « DNS sécurisé ». Désactive-le : <b>Chrome</b> → Paramètres → Confidentialité et sécurité → Sécurité → <b>Utiliser un DNS sécurisé</b> : désactivé. <b>Firefox</b> → Paramètres → Vie privée et sécurité → <b>DNS via HTTPS</b> : désactivé.</p>
+      <p class="muted" data-lang="en">Chrome and Firefox can bypass the filter with their own "secure DNS". Turn it off: <b>Chrome</b> → Settings → Privacy and security → Security → <b>Use secure DNS</b>: off. <b>Firefox</b> → Settings → Privacy &amp; Security → <b>DNS over HTTPS</b>: off.</p>
     </div>
   </section>
 
-  <!-- VERROUILLAGE + APPS TOR -->
+  <!-- VERROUILLAGE + TOR -->
   <section class="card">
-    <details id="lockDetails">
-      <summary>Verrouiller et bloquer Tor</summary>
+    <details>
+      <summary><span data-lang="fr">Verrouiller et bloquer Tor</span><span data-lang="en">Lock down and block Tor</span></summary>
       <div>
-        <p class="muted"><b>Important :</b> aucun filtre ne peut voir à l'intérieur d'un navigateur Tor (Onion Browser, Orbot, OrNet…). La seule protection contre le dark web, c'est qu'aucune app Tor ne soit sur l'iPhone.</p>
-        <p class="muted">À faire une seule fois, avec ton formateur à côté de toi :</p>
-        <ol class="simple">
-          <li><b>Supprime toute app Tor</b> : appui long sur l'icône → <span class="path">Remove App</span> → <span class="path">Delete App</span>. Cherche aussi les apps avec « Tor », « Onion » ou « Dark » dans le nom.</li>
-          <li><span class="path">Settings → Screen Time → Content &amp; Privacy Restrictions</span> → active l'interrupteur.</li>
-          <li><span class="path">App Store, Media, Web &amp; Games → Web Content</span> → <b>Limit Adult Websites</b>.</li>
-          <li>Même écran → <span class="path">Apps</span> → choisis la limite <b>juste en dessous de la plus haute</b>. Les navigateurs Tor sont masqués, même s'ils sont réinstallés.</li>
-          <li><span class="path">App Store Purchases → Installing Apps</span> → <b>Don't Allow</b>. Plus aucune app Tor, dark web ou de rencontre ne peut être téléchargée.</li>
-          <li>Retour à Screen Time → <span class="path">Lock Screen Time Settings</span> (ou « Use Screen Time Passcode ») : <b>ton formateur</b> tape le code et le garde.</li>
+        <div class="note" data-lang="fr"><b>Important :</b> aucun filtre ne peut voir à l'intérieur d'un navigateur Tor (Onion Browser, Orbot, Tor Browser…). La seule protection contre le dark web, c'est qu'aucune app Tor ne soit sur l'appareil.</div>
+        <div class="note" data-lang="en"><b>Important:</b> no filter can see inside a Tor browser (Onion Browser, Orbot, Tor Browser…). The only protection against the dark web is having no Tor app on the device.</div>
+
+        <!-- iPhone FR -->
+        <ol class="simple" data-device="phone" data-lang="fr">
+          <li><b>Supprime toute app Tor</b> : appui long sur l'icône → <span class="path">Supprimer l'app</span>. Cherche aussi « Tor », « Onion » ou « Dark » dans le nom.</li>
+          <li><span class="path">Réglages → Temps d'écran → Contenu et confidentialité</span> → active l'interrupteur.</li>
+          <li><span class="path">Restrictions de contenu</span> (App Store, médias, web et jeux) → <span class="path">Contenu web</span> → <b>Limiter les sites pour adultes</b>.</li>
+          <li>Même écran → <span class="path">Apps</span> → choisis la limite <b>juste en dessous de la plus haute</b>. Les navigateurs Tor sont masqués.</li>
+          <li><span class="path">Achats sur l'App Store → Installation d'apps</span> → <b>Ne pas autoriser</b>.</li>
+          <li>Retour à Temps d'écran → <span class="path">Verrouiller les réglages de Temps d'écran</span> : <b>ton formateur</b> tape le code et le garde.</li>
         </ol>
-        <p class="muted" style="margin-top:10px">Pour installer une nouvelle app plus tard, ton formateur remet <b>Installing Apps → Allow</b> avec son code, puis le remet sur <b>Don't Allow</b>.</p>
+        <!-- iPhone EN -->
+        <ol class="simple" data-device="phone" data-lang="en">
+          <li><b>Delete every Tor app</b>: long-press the icon → <span class="path">Remove App</span> → <span class="path">Delete App</span>. Also look for "Tor", "Onion" or "Dark" in app names.</li>
+          <li><span class="path">Settings → Screen Time → Content &amp; Privacy Restrictions</span> → turn it on.</li>
+          <li><span class="path">App Store, Media, Web &amp; Games → Web Content</span> → <b>Limit Adult Websites</b>.</li>
+          <li>Same screen → <span class="path">Apps</span> → pick the limit <b>just below the highest</b>. Tor browsers are hidden.</li>
+          <li><span class="path">App Store Purchases → Installing Apps</span> → <b>Don't Allow</b>.</li>
+          <li>Back to Screen Time → <span class="path">Lock Screen Time Settings</span>: <b>your trainer</b> types the passcode and keeps it.</li>
+        </ol>
+        <!-- Ordinateur FR -->
+        <ol class="simple" data-device="computer" data-lang="fr">
+          <li><b>Supprime toute app Tor</b> (Tor Browser…) : glisse-la dans la Corbeille et vide-la.</li>
+          <li><b>Mac</b> : <span class="path">Réglages Système → Temps d'écran → Contenu et confidentialité</span> → active l'interrupteur.</li>
+          <li><span class="path">Restrictions du Store → Apps</span> → <b>12+</b>. <span class="path">Restrictions de contenu → Accès au contenu web</span> → <b>Limiter les sites pour adultes</b>.</li>
+          <li><span class="path">Verrouiller les réglages Temps d'écran</span> : <b>ton formateur</b> tape le code et le garde.</li>
+          <li><b>Mac et Windows</b> : ton compte doit être <b>Standard</b>, pas administrateur. Ton formateur garde le compte <b>administrateur</b> et son mot de passe. Sans lui, impossible d'installer des apps téléchargées sur Internet.</li>
+        </ol>
+        <!-- Ordinateur EN -->
+        <ol class="simple" data-device="computer" data-lang="en">
+          <li><b>Delete every Tor app</b> (Tor Browser…): move it to the Trash and empty it.</li>
+          <li><b>Mac</b>: <span class="path">System Settings → Screen Time → Content &amp; Privacy</span> → turn it on.</li>
+          <li><span class="path">Store Restrictions → Apps</span> → <b>12+</b>. <span class="path">Content Restrictions → Access to Web Content</span> → <b>Limit Adult Websites</b>.</li>
+          <li><span class="path">Lock Screen Time Settings</span>: <b>your trainer</b> types the passcode and keeps it.</li>
+          <li><b>Mac and Windows</b>: your account must be <b>Standard</b>, not administrator. Your trainer keeps the <b>administrator</b> account and its password. Without it, apps downloaded from the internet can't be installed.</li>
+        </ol>
       </div>
     </details>
   </section>
 
   <!-- NORDVPN -->
   <section class="card">
-    <details id="vpnDetails">
-      <summary>Garder la protection avec NordVPN</summary>
+    <details>
+      <summary><span data-lang="fr">Garder la protection avec NordVPN</span><span data-lang="en">Keep the protection with NordVPN</span></summary>
       <div>
-        <p class="muted">Quand un VPN est connecté, il remplace le filtre N.C.L.B. Ce réglage unique, fait par ton formateur, fait passer NordVPN par N.C.L.B : blocage et journal continuent avec le VPN.</p>
-        <ol class="simple">
-          <li><b>Dans NextDNS</b> : <span class="path">Setup → Linked IP</span>. Note l'<b>adresse IPv4</b> et copie l'<b>update URL</b>.</li>
-          <li><b>Dans NordVPN</b> : désactive <b>Threat Protection</b> (ou « Real-time protection »).</li>
-          <li><span class="path">Settings → Custom DNS</span> → active <b>Use custom DNS</b> et entre l'adresse IPv4 de NextDNS.</li>
-          <li><b>Dans l'app Shortcuts</b> : <span class="path">Automation → +</span> → <span class="path">App</span> → <b>NordVPN</b> → coche <b>Is Closed</b> → <b>Run Immediately</b> → <b>Next</b>.</li>
-          <li>Touche <b>Create New Shortcut</b>, cherche <b>Get Contents of URL</b>, touche le mot bleu <b>URL</b>, colle l'update URL → <b>Done</b>.</li>
-          <li>Connecte toujours NordVPN au <b>même serveur</b> (pas « Quick Connect »), puis ferme l'app : le raccourci relie automatiquement le VPN à N.C.L.B.</li>
-          <li>Vérifie : VPN connecté, ouvre cette page. Elle doit afficher <b>Protection active</b>.</li>
+        <p class="muted" data-lang="fr">Quand un VPN est connecté, il remplace le filtre. Ce réglage unique, fait par ton formateur, fait passer NordVPN par N.C.L.B : blocage et journal continuent avec le VPN.</p>
+        <p class="muted" data-lang="en">When a VPN is connected, it replaces the filter. This one-time setup, done by your trainer, routes NordVPN through N.C.L.B: blocking and the log keep working with the VPN on.</p>
+
+        <!-- commun FR -->
+        <ol class="simple" data-lang="fr">
+          <li><b>NextDNS</b> : <span class="path">Setup → Linked IP</span>. Note l'<b>adresse IPv4</b> et copie l'<b>Update URL</b> (sous « Show advanced options »). Garde ce lien privé.</li>
+          <li><b>NordVPN</b> : désactive <b>Protection contre les menaces</b> (Threat Protection).</li>
+          <li><span class="path">Paramètres → DNS personnalisé</span> → active-le et entre l'adresse IPv4 de NextDNS.</li>
+          <li>Connecte toujours NordVPN au <b>même serveur</b> (pas « Connexion rapide »).</li>
         </ol>
+        <ol class="simple" data-lang="en">
+          <li><b>NextDNS</b>: <span class="path">Setup → Linked IP</span>. Note the <b>IPv4 address</b> and copy the <b>Update URL</b> (under "Show advanced options"). Keep this link private.</li>
+          <li><b>NordVPN</b>: turn off <b>Threat Protection</b>.</li>
+          <li><span class="path">Settings → Custom DNS</span> → turn it on and enter the NextDNS IPv4 address.</li>
+          <li>Always connect NordVPN to the <b>same server</b> (not "Quick Connect").</li>
+        </ol>
+
+        <!-- iPhone : automatisation -->
+        <h3 data-device="phone"><span data-lang="fr">Automatique sur iPhone</span><span data-lang="en">Automatic on iPhone</span></h3>
+        <ol class="simple" data-device="phone" data-lang="fr">
+          <li>App <b>Raccourcis</b> → <span class="path">Automatisation → +</span> → <span class="path">App</span> → <b>NordVPN</b> → coche <b>Est fermée</b> → <b>Exécuter immédiatement</b> → <b>Suivant</b>.</li>
+          <li><b>Créer un raccourci</b> → cherche <b>Obtenir le contenu de l'URL</b> → touche <b>URL</b> → colle l'Update URL → <b>OK</b>.</li>
+          <li>Connecte NordVPN puis ferme l'app : le VPN est relié à N.C.L.B automatiquement.</li>
+        </ol>
+        <ol class="simple" data-device="phone" data-lang="en">
+          <li><b>Shortcuts</b> app → <span class="path">Automation → +</span> → <span class="path">App</span> → <b>NordVPN</b> → check <b>Is Closed</b> → <b>Run Immediately</b> → <b>Next</b>.</li>
+          <li><b>Create New Shortcut</b> → search <b>Get Contents of URL</b> → tap <b>URL</b> → paste the Update URL → <b>Done</b>.</li>
+          <li>Connect NordVPN, then close the app: the VPN is linked to N.C.L.B automatically.</li>
+        </ol>
+
+        <!-- Ordinateur -->
+        <h3 data-device="computer"><span data-lang="fr">Sur ordinateur</span><span data-lang="en">On a computer</span></h3>
+        <p class="muted" data-device="computer" data-lang="fr">Après chaque connexion à NordVPN, ouvre l'Update URL une fois (garde-la en favori dans le navigateur).</p>
+        <p class="muted" data-device="computer" data-lang="en">After each NordVPN connection, open the Update URL once (keep it as a browser bookmark).</p>
+
+        <p class="muted" style="margin-top:10px" data-lang="fr">Vérification : VPN connecté, recharge cette page. Elle doit afficher <b>Protection active</b>.</p>
+        <p class="muted" style="margin-top:10px" data-lang="en">Check: with the VPN connected, reload this page. It should show <b>Protection active</b>.</p>
       </div>
     </details>
   </section>
 
   <!-- ESPACE FORMATEUR -->
   <section class="card">
-    <details id="coachDetails">
-      <summary>Espace formateur</summary>
+    <details>
+      <summary><span data-lang="fr">Espace formateur</span><span data-lang="en">Trainer area</span></summary>
       <div>
-        <p class="muted">Tu prépares la protection une fois, puis tu envoies le lien.</p>
+        <p class="muted" data-lang="fr">Tu prépares la protection une fois, puis tu envoies le lien.</p>
+        <p class="muted" data-lang="en">Set up the protection once, then send the link.</p>
         <ol class="simple">
-          <li>Crée un compte gratuit sur <a href="https://my.nextdns.io/signup" target="_blank" rel="noopener">my.nextdns.io</a>.</li>
-          <li>Onglet <span class="path">Parental Control</span> : active <b>Porn</b>, <b>Dating</b>, <b>SafeSearch</b> et <b>YouTube Restricted Mode</b>. Laisse « Block Bypass Methods » désactivé, sinon les VPN seraient bloqués.</li>
-          <li>Onglet <span class="path">Denylist</span> : ajoute ces domaines, un par un. Touche un domaine pour le copier.
+          <li>
+            <span data-lang="fr">Crée un compte gratuit sur</span><span data-lang="en">Create a free account at</span>
+            <a href="https://my.nextdns.io/signup" target="_blank" rel="noopener">my.nextdns.io</a>.
+          </li>
+          <li>
+            <span data-lang="fr">Onglet <span class="path">Parental Control</span> : active <b>Porn</b>, <b>Dating</b>, <b>SafeSearch</b> et <b>YouTube Restricted Mode</b>. Laisse « Block Bypass Methods » désactivé, sinon les VPN seraient bloqués.</span>
+            <span data-lang="en"><span class="path">Parental Control</span> tab: turn on <b>Porn</b>, <b>Dating</b>, <b>SafeSearch</b> and <b>YouTube Restricted Mode</b>. Leave "Block Bypass Methods" off, otherwise VPNs would be blocked.</span>
+          </li>
+          <li>
+            <span data-lang="fr">Onglet <span class="path">Denylist</span> : ajoute ces domaines un par un. Touche un domaine pour le copier.</span>
+            <span data-lang="en"><span class="path">Denylist</span> tab: add these domains one by one. Tap a domain to copy it.</span>
             <div class="chips" id="chips"></div>
           </li>
-          <li>Onglet <span class="path">Settings</span> : active les <b>Logs</b>.</li>
-          <li>Entre ton ID NextDNS (onglet <span class="path">Setup</span>) pour créer le lien à envoyer :
+          <li>
+            <span data-lang="fr">Onglet <span class="path">Settings</span> : active les <b>Logs</b>.</span>
+            <span data-lang="en"><span class="path">Settings</span> tab: turn on <b>Logs</b>.</span>
+          </li>
+          <li>
+            <span data-lang="fr">Entre ton ID NextDNS (onglet <span class="path">Setup</span>) pour créer le lien à envoyer :</span>
+            <span data-lang="en">Enter your NextDNS ID (<span class="path">Setup</span> tab) to create the link to send:</span>
             <input type="text" id="coachId" maxlength="6" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="a1b2c3" style="margin-top:10px">
             <div id="coachLinkBox" class="hidden">
               <div class="linkbox" id="coachLink"></div>
-              <button id="copyLink">Copier le lien</button>
-              <button class="secondary hidden" id="shareLink">Partager le lien</button>
+              <button id="copyLink"></button>
+              <button class="secondary hidden" id="shareLink"><span data-lang="fr">Partager le lien</span><span data-lang="en">Share the link</span></button>
             </div>
           </li>
         </ol>
-        <p class="muted" style="margin-top:12px"><b>Le journal</b> : sur <a href="https://my.nextdns.io" target="_blank" rel="noopener">my.nextdns.io</a> → onglet <b>Logs</b> → active <b>Blocked Queries Only</b>. Chaque tentative bloquée s'affiche avec la date, l'heure, le domaine et la raison.</p>
+        <p class="muted" style="margin-top:12px" data-lang="fr"><b>Le journal</b> : <a href="https://my.nextdns.io" target="_blank" rel="noopener">my.nextdns.io</a> → onglet <b>Logs</b> → active <b>Blocked Queries Only</b>. Chaque tentative bloquée s'affiche avec la date, l'heure, le domaine et la raison.</p>
+        <p class="muted" style="margin-top:12px" data-lang="en"><b>The log</b>: <a href="https://my.nextdns.io" target="_blank" rel="noopener">my.nextdns.io</a> → <b>Logs</b> tab → turn on <b>Blocked Queries Only</b>. Every blocked attempt shows the date, time, domain and reason.</p>
       </div>
     </details>
   </section>
@@ -216,13 +359,31 @@
   <!-- AIDE -->
   <section class="card">
     <details>
-      <summary>Ça ne marche pas ?</summary>
+      <summary><span data-lang="fr">Ça ne marche pas ?</span><span data-lang="en">Not working?</span></summary>
       <div>
-        <ol class="simple">
-          <li><span class="path">Settings → General → VPN &amp; Device Management → DNS</span> : choisis <b>N.C.L.B</b>.</li>
-          <li><span class="path">Settings → ton nom → iCloud → Private Relay</span> : désactive-le.</li>
+        <ol class="simple" data-device="phone" data-lang="fr">
+          <li><span class="path">Réglages → Général → VPN et gestion de l'appareil → DNS</span> : choisis <b>N.C.L.B</b>.</li>
+          <li><span class="path">Réglages → ton nom → iCloud → Relais privé</span> : désactive-le.</li>
           <li>Si un VPN est connecté : suis « Garder la protection avec NordVPN », ou déconnecte-le pour vérifier.</li>
           <li>Active puis désactive le mode Avion, et touche <b>Vérifier à nouveau</b>.</li>
+        </ol>
+        <ol class="simple" data-device="phone" data-lang="en">
+          <li><span class="path">Settings → General → VPN &amp; Device Management → DNS</span>: choose <b>N.C.L.B</b>.</li>
+          <li><span class="path">Settings → your name → iCloud → Private Relay</span>: turn it off.</li>
+          <li>If a VPN is connected: follow "Keep the protection with NordVPN", or disconnect it to check.</li>
+          <li>Turn Airplane Mode on and off, then tap <b>Check again</b>.</li>
+        </ol>
+        <ol class="simple" data-device="computer" data-lang="fr">
+          <li><b>Mac</b> : <span class="path">Réglages Système → Réseau → VPN et filtres</span> : <b>N.C.L.B</b> doit être actif.</li>
+          <li><span class="path">Réglages Système → ton nom → iCloud → Relais privé</span> : désactive-le.</li>
+          <li>Désactive le « DNS sécurisé » de Chrome ou Firefox (voir Installer la protection).</li>
+          <li>Si un VPN est connecté : suis « Garder la protection avec NordVPN ».</li>
+        </ol>
+        <ol class="simple" data-device="computer" data-lang="en">
+          <li><b>Mac</b>: <span class="path">System Settings → Network → VPN &amp; Filters</span>: <b>N.C.L.B</b> must be active.</li>
+          <li><span class="path">System Settings → your name → iCloud → Private Relay</span>: turn it off.</li>
+          <li>Turn off Chrome's or Firefox's "secure DNS" (see Install the protection).</li>
+          <li>If a VPN is connected: follow "Keep the protection with NordVPN".</li>
         </ol>
       </div>
     </details>
@@ -230,7 +391,11 @@
 
 </main>
 
-<footer><b>N.C.L.B</b><br>Aucune donnée n'est envoyée par cette page.</footer>
+<footer>
+  <span class="mark">N.C.L.B</span><br>
+  <span class="credit"><span data-lang="fr">Créé par</span><span data-lang="en">Created by</span> UNUHU Records</span><br>
+  <span data-lang="fr">Aucune donnée n'est envoyée par cette page.</span><span data-lang="en">This page sends no data.</span>
+</footer>
 
 <script>
 (function () {
@@ -238,64 +403,112 @@
   var DENYLIST = ["*.onion", "redgifs.com", "onion.ly", "onion.ws", "onion.pet", "onion.to", "onion.link",
                   "tor2web.org", "ahmia.fi", "dark.fail", "torproject.org", "t.me", "telegram.org", "telegram.me"];
 
+  var T = {
+    fr: {
+      checking: ["⏳", "Vérification…", "N.C.L.B vérifie si la protection est active sur cet appareil."],
+      ok: ["🛡️", "Protection active", "Les contenus interdits sont bloqués et ton formateur voit le journal."],
+      off: ["❌", "Protection inactive", "Installe N.C.L.B ci-dessous. Si c'est déjà fait, ouvre « Ça ne marche pas ? »."],
+      wrong: ["⚠️", "Mauvais code", "Un filtre est actif, mais pas celui de ton formateur. Supprime l'ancien profil puis réinstalle N.C.L.B."],
+      unknown: ["❔", "Vérification impossible", "Ouvre test.nextdns.io : « status: ok » signifie que la protection est active."],
+      needId: "Entre d'abord le code à 6 caractères de ton formateur.",
+      copy: "Copier le lien", copied: "Lien copié ✓", chipCopied: "Copié ✓",
+      share: "Ouvre ce lien et touche « Installer N.C.L.B »."
+    },
+    en: {
+      checking: ["⏳", "Checking…", "N.C.L.B is checking whether the protection is active on this device."],
+      ok: ["🛡️", "Protection active", "Forbidden content is blocked and your trainer can see the log."],
+      off: ["❌", "Protection inactive", "Install N.C.L.B below. If you already did, open \"Not working?\"."],
+      wrong: ["⚠️", "Wrong code", "A filter is active, but not your trainer's. Remove the old profile and reinstall N.C.L.B."],
+      unknown: ["❔", "Can't check", "Open test.nextdns.io: \"status: ok\" means the protection is active."],
+      needId: "First enter your trainer's 6-character code.",
+      copy: "Copy the link", copied: "Link copied ✓", chipCopied: "Copied ✓",
+      share: "Open this link and tap \"Install N.C.L.B\"."
+    }
+  };
+
   var $ = function (id) { return document.getElementById(id); };
-  function store(k, v) { try { if (v === undefined) return localStorage.getItem("nclb." + k); localStorage.setItem("nclb." + k, v); } catch (e) { return null; } }
+  function store(k, v) {
+    try { if (v === undefined) return localStorage.getItem("nclb." + k); localStorage.setItem("nclb." + k, v); }
+    catch (e) { return null; }
+  }
   function validId(s) { s = (s || "").trim().toLowerCase(); return /^[a-z0-9]{6}$/.test(s) ? s : ""; }
 
-  // ---- ID : depuis le lien du formateur (?id=xxxxxx), sinon mémorisé, sinon saisi
+  // ---- Langue
+  var lang = store("lang") || ((navigator.language || "fr").toLowerCase().indexOf("fr") === 0 ? "fr" : "en");
+  var statusKey = "checking";
+  function setLang(l) {
+    lang = l === "en" ? "en" : "fr";
+    store("lang", lang);
+    document.body.classList.toggle("lang-fr", lang === "fr");
+    document.body.classList.toggle("lang-en", lang === "en");
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-set-lang]").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-set-lang") === lang); });
+    renderStatus();
+    $("copyLink").textContent = T[lang].copy;
+  }
+  document.querySelectorAll("[data-set-lang]").forEach(function (b) {
+    b.addEventListener("click", function () { setLang(b.getAttribute("data-set-lang")); });
+  });
+
+  // ---- Appareil
+  var ua = navigator.userAgent;
+  var mobile = /iPhone|iPad|iPod|Android/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  var device = store("device") || (mobile ? "phone" : "computer");
+  function setDevice(d) {
+    device = d === "computer" ? "computer" : "phone";
+    store("device", device);
+    document.body.classList.toggle("dev-phone", device === "phone");
+    document.body.classList.toggle("dev-computer", device === "computer");
+    document.querySelectorAll("[data-set-device]").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-set-device") === device); });
+  }
+  document.querySelectorAll("[data-set-device]").forEach(function (b) {
+    b.addEventListener("click", function () { setDevice(b.getAttribute("data-set-device")); });
+  });
+
+  // ---- Code du formateur
   var params = new URLSearchParams(location.search);
   var linkId = validId(params.get("id"));
   if (linkId) store("id", linkId);
   var savedId = validId(store("id"));
-
   function currentId() { return linkId || validId($("idInput").value) || savedId; }
-
   if (linkId || savedId) {
     $("noId").classList.add("hidden");
     $("hasId").classList.remove("hidden");
     $("idShown").textContent = linkId || savedId;
   }
 
-  // ---- Vérification automatique
-  function setStatus(kind, icon, title, text) {
+  // ---- État de la protection
+  function renderStatus() {
+    var s = T[lang][statusKey];
     var c = $("statusCard");
-    c.classList.remove("ok", "off");
-    if (kind) c.classList.add(kind);
-    $("statusIcon").textContent = icon;
-    $("statusTitle").textContent = title;
-    $("statusText").textContent = text;
+    c.classList.toggle("ok", statusKey === "ok");
+    c.classList.toggle("off", statusKey === "off" || statusKey === "wrong");
+    $("statusIcon").textContent = s[0];
+    $("statusTitle").textContent = s[1];
+    $("statusText").textContent = s[2];
   }
+  function setStatus(k) { statusKey = k; renderStatus(); }
 
   function check() {
-    setStatus("", "⏳", "Vérification…", "N.C.L.B vérifie si la protection est active sur cet appareil.");
+    setStatus("checking");
     var done = false;
-    var timer = setTimeout(function () { if (!done) { done = true; unknown(); } }, 8000);
+    var timer = setTimeout(function () { if (!done) { done = true; setStatus("unknown"); } }, 8000);
     fetch("https://test.nextdns.io/?t=" + Date.now(), { cache: "no-store" })
       .then(function (r) { return r.json(); })
       .then(function (d) {
         if (done) return; done = true; clearTimeout(timer);
         if (d && d.status === "ok") {
           var id = currentId();
-          if (id && d.profile && d.profile !== id) {
-            setStatus("off", "⚠️", "Mauvais code", "Un filtre est actif, mais pas celui de ton formateur. Supprime l'ancien profil puis réinstalle N.C.L.B.");
-          } else {
-            setStatus("ok", "🛡️", "Protection active", "Les contenus interdits sont bloqués et ton formateur voit le journal.");
-            $("installCard").classList.add("hidden");
-          }
+          setStatus(id && d.profile && d.profile !== id ? "wrong" : "ok");
         } else {
-          setStatus("off", "❌", "Protection inactive", "Installe N.C.L.B ci-dessous. Si c'est déjà fait, ouvre « Ça ne marche pas ? » en bas de la page.");
-          $("installCard").classList.remove("hidden");
+          setStatus("off");
         }
       })
-      .catch(function () { if (!done) { done = true; clearTimeout(timer); unknown(); } });
-  }
-  function unknown() {
-    setStatus("", "❔", "Vérification impossible", "Ouvre test.nextdns.io dans Safari : « status: ok » signifie que la protection est active.");
+      .catch(function () { if (!done) { done = true; clearTimeout(timer); setStatus("unknown"); } });
   }
   $("recheck").addEventListener("click", check);
-  check();
 
-  // ---- Profil
+  // ---- Profil (iPhone et Mac)
   function uuid() {
     if (window.crypto && crypto.randomUUID) return crypto.randomUUID().toUpperCase();
     return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
@@ -318,21 +531,20 @@
           "<key>PayloadUUID</key><string>" + dns + "</string>" +
           "<key>PayloadVersion</key><integer>1</integer>" +
         "</dict></array>" +
-        "<key>PayloadDescription</key><string>Protection N.C.L.B pour toutes les apps. Les VPN restent autorisés.</string>" +
+        "<key>PayloadDescription</key><string>N.C.L.B — Created by UNUHU Records.</string>" +
         "<key>PayloadDisplayName</key><string>N.C.L.B (No.Child.Left.Behind)</string>" +
         "<key>PayloadIdentifier</key><string>org.nclb.profile." + root + "</string>" +
-        "<key>PayloadOrganization</key><string>N.C.L.B</string>" +
+        "<key>PayloadOrganization</key><string>UNUHU Records</string>" +
         "<key>PayloadRemovalDisallowed</key><false/>" +
         "<key>PayloadType</key><string>Configuration</string>" +
         "<key>PayloadUUID</key><string>" + root + "</string>" +
         "<key>PayloadVersion</key><integer>1</integer>" +
       "</dict></plist>\n";
   }
-
   $("installBtn").addEventListener("click", function () {
     var err = $("installErr");
     var id = currentId();
-    if (!id) { err.textContent = "Entre d'abord le code à 6 caractères de ton formateur."; err.classList.remove("hidden"); return; }
+    if (!id) { err.textContent = T[lang].needId; err.classList.remove("hidden"); return; }
     err.classList.add("hidden");
     store("id", id);
     var blob = new Blob([buildProfile(id)], { type: "application/x-apple-aspen-config" });
@@ -341,38 +553,39 @@
     a.href = url; a.download = "NCLB.mobileconfig";
     document.body.appendChild(a); a.click();
     setTimeout(function () { URL.revokeObjectURL(url); a.remove(); }, 4000);
-    $("afterInstall").classList.remove("hidden");
   });
 
   // ---- Espace formateur
-  var chips = $("chips");
   DENYLIST.forEach(function (d) {
     var b = document.createElement("button");
     b.type = "button"; b.className = "chip"; b.textContent = d;
     b.addEventListener("click", function () {
-      var ok = function () { b.classList.add("copied"); b.textContent = "Copié ✓"; setTimeout(function () { b.classList.remove("copied"); b.textContent = d; }, 1200); };
+      var ok = function () { b.classList.add("copied"); b.textContent = T[lang].chipCopied; setTimeout(function () { b.classList.remove("copied"); b.textContent = d; }, 1200); };
       if (navigator.clipboard) navigator.clipboard.writeText(d).then(ok, ok); else ok();
     });
-    chips.appendChild(b);
+    $("chips").appendChild(b);
   });
-
-  function studentLink(id) { return location.origin + location.pathname + "?id=" + id; }
+  function sendLink(id) { return location.origin + location.pathname + "?id=" + id; }
   $("coachId").addEventListener("input", function () {
     var id = validId(this.value);
     $("coachLinkBox").classList.toggle("hidden", !id);
-    if (id) $("coachLink").textContent = studentLink(id);
+    if (id) $("coachLink").textContent = sendLink(id);
   });
   $("copyLink").addEventListener("click", function () {
     var btn = this, link = $("coachLink").textContent;
-    var ok = function () { btn.textContent = "Lien copié ✓"; setTimeout(function () { btn.textContent = "Copier le lien"; }, 1500); };
+    var ok = function () { btn.textContent = T[lang].copied; setTimeout(function () { btn.textContent = T[lang].copy; }, 1500); };
     if (navigator.clipboard) navigator.clipboard.writeText(link).then(ok, ok); else ok();
   });
   if (navigator.share) {
     $("shareLink").classList.remove("hidden");
     $("shareLink").addEventListener("click", function () {
-      navigator.share({ title: "N.C.L.B", text: "Ouvre ce lien dans Safari et touche « Installer N.C.L.B ».", url: $("coachLink").textContent }).catch(function () {});
+      navigator.share({ title: "N.C.L.B", text: T[lang].share, url: $("coachLink").textContent }).catch(function () {});
     });
   }
+
+  setLang(lang);
+  setDevice(device);
+  check();
 })();
 </script>
 </body>
