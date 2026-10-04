@@ -196,7 +196,7 @@
       <li><input type="checkbox"><span>Onglet <span class="path">Setup</span> : noter l'<b>ID</b> (6 caractères) et te le donner.</span></li>
     </ol>
     <div class="chips" id="denylist"></div>
-    <div class="note">Seulement 5 domaines. Les sites de rencontre sont bloqués par la catégorie <b>Dating</b>, sans rien taper. <b>.onion</b> : NextDNS refuse cette entrée car ce n'est pas une extension Internet. Ces adresses ne passent jamais par le DNS, seulement par une app Tor, et c'est le verrou de téléchargement (étape 3) qui les rend impossibles. <code>redgifs.com</code> héberge une grande partie des vidéos NSFW partagées sur Reddit : le bloquer les rend illisibles, même dans l'app Reddit. Reddit et X ne sont <b>pas</b> dans la liste : ils restent accessibles.</div>
+    <div class="note"><b>.onion</b> : ajoute d'abord <code>*.onion</code>. Si NextDNS refuse, passe au suivant : les adresses .onion ne s'ouvrent jamais sans app Tor, et le verrou de téléchargement (étape 3) rend ces apps impossibles. Les domaines <code>onion.ly</code>, <code>onion.ws</code>, <code>onion.pet</code>, <code>onion.to</code>, <code>onion.link</code> et <code>tor2web.org</code> bloquent les <b>passerelles</b> : les seuls sites qui permettent d'ouvrir le dark web depuis Safari, sans app Tor. <code>ahmia.fi</code> et <code>dark.fail</code> sont des annuaires du dark web. <code>redgifs.com</code> héberge une grande partie des vidéos NSFW de Reddit. Les sites de rencontre sont bloqués par la catégorie <b>Dating</b>, sans rien taper.</div>
 
     <label class="field" for="nextdnsId">ID NextDNS donné par ton formateur</label>
     <input type="text" id="nextdnsId" maxlength="6" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="a1b2c3">
@@ -234,7 +234,7 @@
       <li data-show="apps"><input type="checkbox"><span><span class="path">Restrictions de l'App Store et d'iTunes</span> → <b>Apps</b> : laisser <b>toutes les apps</b> autorisées, pour garder Reddit et X (déjà installées).</span></li>
       <li><input type="checkbox"><span><span class="path">Contenu et confidentialité → Achats dans l'iTunes et l'App Store</span> → <b>Installation d'apps → Ne pas autoriser</b>. C'est le verrou qui rend impossible le téléchargement de navigateurs Tor et d'apps dark web.</span></li>
       <li><input type="checkbox"><span>Même écran → <b>Contenu web</b> → <b>Limiter les sites pour adultes</b>.</span></li>
-      <li><input type="checkbox"><span>Sous <b>Ne jamais autoriser</b>, ajouter : <code>t.me</code>, <code>telegram.org</code>, <code>torproject.org</code>, <code>redgifs.com</code>.</span></li>
+      <li><input type="checkbox"><span>Sous <b>Ne jamais autoriser</b>, ajouter : <code>redgifs.com</code>, <code>onion.ly</code>, <code>onion.ws</code>, <code>tor2web.org</code>, <code>torproject.org</code>, <code>t.me</code>.</span></li>
       <li><input type="checkbox"><span>Laisser « Applications VPN » <b>autorisées</b> : tes VPN déjà installés continuent de fonctionner.</span></li>
       <li><input type="checkbox"><span>Retour à Temps d'écran → <b>Utiliser un code Temps d'écran</b> : <b>ton formateur</b> le tape et le garde.</span></li>
     </ol>
@@ -297,7 +297,7 @@
 (function () {
   "use strict";
 
-  var DENY_BASE = ["t.me", "telegram.org", "telegram.me", "redgifs.com", "torproject.org"];
+  var DENY_BASE = ["*.onion", "redgifs.com", "onion.ly", "onion.ws", "onion.pet", "onion.to", "onion.link", "tor2web.org", "ahmia.fi", "dark.fail", "torproject.org", "t.me", "telegram.org", "telegram.me"];
 
   var PROVIDERS = {
     nextdns:       { name: "NextDNS",             url: null, ips: [] },
