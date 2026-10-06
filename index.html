@@ -242,6 +242,10 @@
     background: var(--paper); color: var(--ink-2); border: 1px solid var(--line); text-decoration: none; box-shadow: none;
   }
   .scripture-hero .verse-foot { justify-content: center; flex-direction: column; gap: 14px; }
+  .verse-group { margin: 0 0 22px; }
+  .group-title { display: flex; align-items: center; gap: 8px; margin: 18px 4px 10px; font-size: 16px; color: var(--ink); }
+  .group-title .count { font: 700 11px Inter, sans-serif; color: var(--gold-deep); background: var(--gold-soft); border: 1px solid var(--gold-line); border-radius: 99px; padding: 1px 8px; }
+  button.more { margin-top: 0; }
   .credit-line { font-size: 12.5px; color: var(--muted); text-align: center; margin: 4px 8px 0; }
 
 
@@ -343,8 +347,8 @@
             <a href="https://my.nextdns.io/signup" target="_blank" rel="noopener">my.nextdns.io</a>.
           </li>
           <li>
-            <span data-lang="fr">Onglet <span class="path">Parental Control</span> : activez <b>Porn</b>, <b>Dating</b>, <b>SafeSearch</b> et <b>YouTube Restricted Mode</b>. Laissez « Block Bypass Methods » désactivé, sinon les VPN seraient bloqués.</span>
-            <span data-lang="en"><span class="path">Parental Control</span> tab: turn on <b>Porn</b>, <b>Dating</b>, <b>SafeSearch</b> and <b>YouTube Restricted Mode</b>. Leave "Block Bypass Methods" off, otherwise VPNs would be blocked.</span>
+            <span data-lang="fr">Onglet <span class="path">Parental Control</span> : dans <b>Categories</b>, activez <b>Porn</b> et <b>Dating</b> ; activez aussi <b>SafeSearch</b>. Dans <b>Websites, Apps &amp; Games</b>, ajoutez <b>Telegram</b> : cela bloque tous les domaines de Telegram, pas seulement t.me. Laissez « Block Bypass Methods » désactivé, sinon les VPN seraient bloqués.</span>
+            <span data-lang="en"><span class="path">Parental Control</span> tab: under <b>Categories</b>, turn on <b>Porn</b> and <b>Dating</b>; also turn on <b>SafeSearch</b>. Under <b>Websites, Apps &amp; Games</b>, add <b>Telegram</b>: this blocks every Telegram domain, not just t.me. Leave "Block Bypass Methods" off, otherwise VPNs would be blocked.</span>
           </li>
           <li>
             <span data-lang="fr">Onglet <span class="path">Denylist</span> : ajoutez ces domaines un par un. Touchez un domaine pour le copier.</span>
@@ -463,6 +467,7 @@
         <!-- iPhone FR -->
         <ol class="simple" data-device="phone" data-lang="fr">
           <li><b>Supprimez toute app Tor</b> : appui long sur l'icône → <span class="path">Supprimer l'app</span>. Recherchez aussi « Tor », « Onion » ou « Dark » dans le nom des apps.</li>
+          <li><b>Supprimez l'app Telegram</b> si elle est installée. L'app parle directement à ses serveurs et passe à côté du filtre : les liens t.me s'y ouvrent même quand t.me est bloqué.</li>
           <li><span class="path">Réglages → Temps d'écran → Contenu et confidentialité</span> → activez l'interrupteur.</li>
           <li><span class="path">Restrictions de contenu</span> (App Store, médias, web et jeux) → <span class="path">Contenu web</span> → <b>Limiter les sites pour adultes</b>.</li>
           <li class="key"><span class="path">Achats sur l'App Store → Installation d'apps</span> → <b>Ne pas autoriser</b>. L'App Store disparaît : plus aucune app ne peut être installée ni <b>réinstallée</b>, y compris une app Tor déjà supprimée.</li>
@@ -471,6 +476,7 @@
         <!-- iPhone EN -->
         <ol class="simple" data-device="phone" data-lang="en">
           <li><b>Delete every Tor app</b>: long-press the icon → <span class="path">Remove App</span> → <span class="path">Delete App</span>. Also look for "Tor", "Onion" or "Dark" in app names.</li>
+          <li><b>Delete the Telegram app</b> if it's installed. The app talks directly to its servers and goes around the filter: t.me links open in it even when t.me is blocked.</li>
           <li><span class="path">Settings → Screen Time → Content &amp; Privacy Restrictions</span> → turn it on.</li>
           <li><span class="path">App Store, Media, Web &amp; Games → Web Content</span> → <b>Limit Adult Websites</b>.</li>
           <li class="key"><span class="path">App Store Purchases → Installing Apps</span> → <b>Don't Allow</b>. The App Store disappears: no app can be installed or <b>reinstalled</b>, including a Tor app that was already deleted.</li>
@@ -478,7 +484,7 @@
         </ol>
         <!-- Ordinateur FR -->
         <ol class="simple" data-device="computer" data-lang="fr">
-          <li><b>Supprimez toute app Tor</b> (Tor Browser…) : glissez-la dans la Corbeille, puis videz-la.</li>
+          <li><b>Supprimez toute app Tor</b> (Tor Browser…) et l'app <b>Telegram</b> : glissez-les dans la Corbeille, puis videz-la.</li>
           <li><b>Mac</b> : <span class="path">Réglages Système → Temps d'écran → Contenu et confidentialité</span> → activez l'interrupteur.</li>
           <li><span class="path">Restrictions du Store → Apps</span> → <b>12+</b>. <span class="path">Restrictions de contenu → Accès au contenu web</span> → <b>Limiter les sites pour adultes</b>.</li>
           <li><span class="path">Verrouiller les réglages Temps d'écran</span> : <b>le formateur</b> choisit le code et le conserve.</li>
@@ -486,7 +492,7 @@
         </ol>
         <!-- Ordinateur EN -->
         <ol class="simple" data-device="computer" data-lang="en">
-          <li><b>Delete every Tor app</b> (Tor Browser…): move it to the Trash, then empty it.</li>
+          <li><b>Delete every Tor app</b> (Tor Browser…) and the <b>Telegram</b> app: move them to the Trash, then empty it.</li>
           <li><b>Mac</b>: <span class="path">System Settings → Screen Time → Content &amp; Privacy</span> → turn it on.</li>
           <li><span class="path">Store Restrictions → Apps</span> → <b>12+</b>. <span class="path">Content Restrictions → Access to Web Content</span> → <b>Limit Adult Websites</b>.</li>
           <li><span class="path">Lock Screen Time Settings</span>: <b>the trainer</b> sets the passcode and keeps it.</li>
@@ -576,24 +582,28 @@
           <li><span class="path">Réglages → votre nom → iCloud → Relais privé</span> : désactivez-le.</li>
           <li>Si un VPN est connecté : suivez « Maintenir la protection avec NordVPN », ou déconnectez-le pour vérifier.</li>
           <li>Activez puis désactivez le mode Avion, puis touchez <b>Vérifier à nouveau</b>.</li>
+          <li><b>Un site censé être bloqué s'ouvre ?</b> Le formateur ouvre <span class="path">my.nextdns.io → Logs</span> : si le site n'y apparaît pas du tout, l'appareil ne passe pas par le filtre (VPN, Relais privé, ou app comme Telegram) ; s'il apparaît sans être bloqué, il manque dans la Denylist.</li>
         </ol>
         <ol class="simple" data-device="phone" data-lang="en">
           <li><span class="path">Settings → General → VPN &amp; Device Management → DNS</span>: choose <b>N.C.L.B</b>.</li>
           <li><span class="path">Settings → your name → iCloud → Private Relay</span>: turn it off.</li>
           <li>If a VPN is connected: follow "Keep the protection with NordVPN", or disconnect it to check.</li>
           <li>Turn Airplane Mode on and off, then tap <b>Check again</b>.</li>
+          <li><b>A site that should be blocked opens?</b> The trainer opens <span class="path">my.nextdns.io → Logs</span>: if the site isn't listed at all, the device isn't going through the filter (VPN, Private Relay, or an app such as Telegram); if it's listed but not blocked, it's missing from the Denylist.</li>
         </ol>
         <ol class="simple" data-device="computer" data-lang="fr">
           <li><b>Mac</b> : <span class="path">Réglages Système → Réseau → VPN et filtres</span> : <b>N.C.L.B</b> doit être actif.</li>
           <li><span class="path">Réglages Système → votre nom → iCloud → Relais privé</span> : désactivez-le.</li>
           <li>Désactivez le « DNS sécurisé » de Chrome ou Firefox (voir Installer la protection).</li>
           <li>Si un VPN est connecté : suivez « Maintenir la protection avec NordVPN ».</li>
+          <li><b>Un site censé être bloqué s'ouvre ?</b> Le formateur ouvre <span class="path">my.nextdns.io → Logs</span> : si le site n'y apparaît pas du tout, l'appareil ne passe pas par le filtre (VPN, Relais privé, ou app comme Telegram) ; s'il apparaît sans être bloqué, il manque dans la Denylist.</li>
         </ol>
         <ol class="simple" data-device="computer" data-lang="en">
           <li><b>Mac</b>: <span class="path">System Settings → Network → VPN &amp; Filters</span>: <b>N.C.L.B</b> must be active.</li>
           <li><span class="path">System Settings → your name → iCloud → Private Relay</span>: turn it off.</li>
           <li>Turn off Chrome's or Firefox's "secure DNS" (see Install the protection).</li>
           <li>If a VPN is connected: follow "Keep the protection with NordVPN".</li>
+          <li><b>A site that should be blocked opens?</b> The trainer opens <span class="path">my.nextdns.io → Logs</span>: if the site isn't listed at all, the device isn't going through the filter (VPN, Private Relay, or an app such as Telegram); if it's listed but not blocked, it's missing from the Denylist.</li>
         </ol>
       </div>
     </details>
@@ -611,7 +621,7 @@
 (function () {
   "use strict";
   var DENYLIST = ["*.onion", "redgifs.com", "onion.ly", "onion.ws", "onion.pet", "onion.to", "onion.link",
-                  "tor2web.org", "ahmia.fi", "dark.fail", "torproject.org", "t.me", "telegram.org", "telegram.me"];
+                  "tor2web.org", "ahmia.fi", "dark.fail", "torproject.org", "t.me", "telegram.org", "telegram.me", "telegram.dog", "telesco.pe", "telegra.ph"];
 
   var ICONS = {
     checking: '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path class="spin" d="M12 3a9 9 0 1 0 9 9"/></svg>',
@@ -631,7 +641,7 @@
       needId: "Saisissez d'abord le code formateur à 6 caractères.",
       copy: "Copier le lien", copied: "Lien copié", chipCopied: "Copié",
       share: "Ouvrez ce lien et touchez « Installer N.C.L.B ».",
-      all: "Tout", read: "Lire", copyV: "Copier", copiedV: "Copié", another: "Autre verset", today: "Verset du jour",
+      all: "Tout", more: "Voir le reste", openSection: "Voir toute la section", less: "Voir moins", read: "Lire", copyV: "Copier", copiedV: "Copié", another: "Autre verset", today: "Verset du jour",
       themes: { fuir: "Fuir l'impureté", temple: "Le corps, temple de Dieu", maitrise: "Maîtrise de soi", combat: "Le combat spirituel", exemples: "Exemples bibliques", grace: "Grâce et relèvement" }
     },
     en: {
@@ -643,7 +653,7 @@
       needId: "First enter the 6-character trainer code.",
       copy: "Copy the link", copied: "Link copied", chipCopied: "Copied",
       share: "Open this link and tap \"Install N.C.L.B\".",
-      all: "All", read: "Read", copyV: "Copy", copiedV: "Copied", another: "Another verse", today: "Verse of the day",
+      all: "All", more: "See the rest", openSection: "See the whole section", less: "Show less", read: "Read", copyV: "Copy", copiedV: "Copied", another: "Another verse", today: "Verse of the day",
       themes: { fuir: "Flee impurity", temple: "The body, God's temple", maitrise: "Self-control", combat: "Spiritual battle", exemples: "Bible examples", grace: "Grace and restoration" }
     }
   };
@@ -670,9 +680,33 @@
  },
  {
   "theme": "fuir",
-  "ref": "Job 31:1",
-  "url": "https://bible.com/bible/152/job.31.1.S21",
-  "text": "J'avais fait un pacte avec mes yeux. Comment aurais-je pu porter mes regards sur une jeune fille?"
+  "ref": "Matthieu 5:27-28",
+  "url": "https://bible.com/bible/152/mat.5.27-28.S21",
+  "text": "Vous avez appris qu'il a été dit: Tu ne commettras pas d'adultère. Mais moi je vous dis: Tout homme qui regarde une femme pour la convoiter a déjà commis un adultère avec elle dans son cœur."
+ },
+ {
+  "theme": "fuir",
+  "ref": "Colossiens 3:5",
+  "url": "https://bible.com/bible/152/col.3.5.S21",
+  "text": "Faites donc mourir en vous ce qui est terrestre: l'immoralité sexuelle, l'impureté, les passions, les mauvais désirs et la soif de posséder, qui est une idolâtrie."
+ },
+ {
+  "theme": "fuir",
+  "ref": "Ephésiens 5:3",
+  "url": "https://bible.com/bible/152/eph.5.3.S21",
+  "text": "Que l'immoralité sexuelle, l'impureté sous toutes ses formes ou la soif de posséder ne soient même pas mentionnées parmi vous, comme il convient à des saints."
+ },
+ {
+  "theme": "fuir",
+  "ref": "1 Pierre 2:11",
+  "url": "https://bible.com/bible/152/1pe.2.11.S21",
+  "text": "Bien-aimés, je vous encourage, en tant que résidents temporaires et étrangers sur la terre, à vous abstenir des désirs de votre nature propre qui font la guerre à l'âme."
+ },
+ {
+  "theme": "fuir",
+  "ref": "Hébreux 13:4",
+  "url": "https://bible.com/bible/152/heb.13.4.S21",
+  "text": "Que le mariage soit honoré de tous et le lit conjugal épargné par la souillure: ceux qui se livrent à l'immoralité sexuelle et à l'adultère, Dieu les jugera."
  },
  {
   "theme": "temple",
@@ -685,6 +719,18 @@
   "ref": "1 Corinthiens 3:16-17",
   "url": "https://bible.com/bible/152/1co.3.16-17.S21",
   "text": "Ne savez-vous pas que vous êtes le temple de Dieu et que l'Esprit de Dieu habite en vous? Si quelqu'un détruit le temple de Dieu, Dieu le détruira, car le temple de Dieu est saint, et c'est ce que vous êtes."
+ },
+ {
+  "theme": "temple",
+  "ref": "Romains 12:1-2",
+  "url": "https://bible.com/bible/152/rom.12.1-2.S21",
+  "text": "Je vous encourage donc, frères et sœurs, par les compassions de Dieu, à offrir votre corps comme un sacrifice vivant, saint, agréable à Dieu. Ce sera de votre part un culte raisonnable. Ne vous conformez pas au monde actuel, mais soyez transformés par le renouvellement de l'intelligence afin de discerner quelle est la volonté de Dieu, ce qui est bon, agréable et parfait."
+ },
+ {
+  "theme": "temple",
+  "ref": "Matthieu 5:8",
+  "url": "https://bible.com/bible/152/mat.5.8.S21",
+  "text": "Heureux ceux qui ont le cœur pur, car ils verront Dieu!"
  },
  {
   "theme": "maitrise",
@@ -717,6 +763,30 @@
   "text": "Ne vous inquiétez de rien, mais en toute chose faites connaître vos besoins à Dieu par des prières et des supplications, dans une attitude de reconnaissance. Et la paix de Dieu, qui dépasse tout ce que l'on peut comprendre, gardera votre cœur et vos pensées en Jésus-Christ. Enfin, frères et sœurs, portez vos pensées sur tout ce qui est vrai, tout ce qui est honorable, tout ce qui est juste, tout ce qui est pur, tout ce qui est digne d'être aimé, tout ce qui mérite l'approbation, ce qui est synonyme de qualité morale et ce qui est digne de louange."
  },
  {
+  "theme": "maitrise",
+  "ref": "Proverbes 4:23",
+  "url": "https://bible.com/bible/152/pro.4.23.S21",
+  "text": "Garde ton cœur plus que toute autre chose, car de lui jaillissent les sources de la vie."
+ },
+ {
+  "theme": "maitrise",
+  "ref": "Psaume 101:3",
+  "url": "https://bible.com/bible/152/psa.101.3.S21",
+  "text": "Je ne mettrai rien de mauvais devant mes yeux. Je déteste la conduite des pécheurs: elle n'aura aucune prise sur moi."
+ },
+ {
+  "theme": "maitrise",
+  "ref": "Psaume 119:37",
+  "url": "https://bible.com/bible/152/psa.119.37.S21",
+  "text": "Détourne mes yeux de ce qui est sans valeur, fais-moi vivre dans ta voie!"
+ },
+ {
+  "theme": "maitrise",
+  "ref": "1 Corinthiens 9:25-27",
+  "url": "https://bible.com/bible/152/1co.9.25-27.S21",
+  "text": "Tous les athlètes s'imposent toutes sortes de privations, et ils le font pour obtenir une couronne qui va se détruire; mais nous, c'est pour une couronne indestructible. Moi donc, je cours, mais pas comme à l'aventure; je boxe, mais non pour battre l'air. Au contraire, je traite durement mon corps et je le discipline, de peur d'être moi-même disqualifié après avoir prêché aux autres."
+ },
+ {
   "theme": "combat",
   "ref": "Éphésiens 6:10-17",
   "url": "https://bible.com/bible/152/eph.6.10-17.S21",
@@ -739,6 +809,24 @@
   "ref": "1 Corinthiens 10:13",
   "url": "https://bible.com/bible/152/1co.10.13.S21",
   "text": "Aucune tentation ne vous est survenue qui n'ait été humaine. Dieu est fidèle, et il ne permettra pas que vous soyez tentés au-delà de vos forces; mais avec la tentation il préparera aussi le moyen d'en sortir, afin que vous puissiez la supporter."
+ },
+ {
+  "theme": "combat",
+  "ref": "Jacques 4:7",
+  "url": "https://bible.com/bible/152/jas.4.7.S21",
+  "text": "Soumettez-vous donc à Dieu, mais résistez au diable et il fuira loin de vous."
+ },
+ {
+  "theme": "combat",
+  "ref": "Matthieu 26:41",
+  "url": "https://bible.com/bible/152/mat.26.41.S21",
+  "text": "Restez vigilants et priez pour ne pas céder à la tentation. L'esprit est bien disposé, mais par nature l'homme est faible."
+ },
+ {
+  "theme": "combat",
+  "ref": "1 Pierre 5:8-9",
+  "url": "https://bible.com/bible/152/1pe.5.8-9.S21",
+  "text": "Soyez sobres, restez vigilants: votre adversaire, le diable, rôde comme un lion rugissant, cherchant qui dévorer. Résistez-lui avec une foi inébranlable, sachant que les mêmes souffrances sont imposées à vos frères et sœurs dans le monde."
  },
  {
   "theme": "exemples",
@@ -771,6 +859,81 @@
   "quoteRef": "2 Samuel 12:13"
  },
  {
+  "theme": "exemples",
+  "ref": "Job 31:1-12",
+  "url": "https://bible.com/bible/152/job.31.1-12.S21",
+  "title": {
+   "fr": "Job, le pacte avec ses yeux",
+   "en": "Job and the covenant with his eyes"
+  },
+  "summary": {
+   "fr": "Pour défendre son intégrité, Job rappelle qu'il avait pris une décision ferme : ne pas laisser ses yeux s'attarder sur une jeune femme. Il savait que le péché commence par le regard et il a fermé la porte avant la tentation.",
+   "en": "Defending his integrity, Job recalls a firm decision he had made: not to let his eyes linger on a young woman. He knew sin begins with the eyes, and he shut the door before temptation came."
+  },
+  "quote": "J'avais fait un pacte avec mes yeux. Comment aurais-je pu porter mes regards sur une jeune fille?",
+  "quoteRef": "Job 31:1"
+ },
+ {
+  "theme": "exemples",
+  "ref": "Matthieu 4:1-11",
+  "url": "https://bible.com/bible/152/mat.4.1-11.S21",
+  "title": {
+   "fr": "Jésus tenté dans le désert",
+   "en": "Jesus tempted in the wilderness"
+  },
+  "summary": {
+   "fr": "Après quarante jours de jeûne, Jésus est tenté trois fois par le diable. À chaque fois, il répond par la Parole de Dieu : « Il est écrit ». Le diable finit par le laisser.",
+   "en": "After forty days of fasting, Jesus is tempted three times by the devil. Each time, he answers with God's Word: \"It is written\". In the end, the devil leaves him."
+  },
+  "quote": "Jésus répondit: «Il est écrit: L'homme ne vivra pas de pain seulement, mais de toute parole qui sort de la bouche de Dieu.»",
+  "quoteRef": "Matthieu 4:4"
+ },
+ {
+  "theme": "exemples",
+  "ref": "Daniel 1",
+  "url": "https://bible.com/bible/152/dan.1.S21",
+  "title": {
+   "fr": "Daniel refuse de se souiller",
+   "en": "Daniel refuses to defile himself"
+  },
+  "summary": {
+   "fr": "Jeune exilé à la cour de Babylone, Daniel décide dans son cœur de ne pas se souiller avec les plats du roi. Dieu honore sa fidélité : il en ressort en meilleure forme et plus sage que tous les autres.",
+   "en": "A young exile at the court of Babylon, Daniel resolves in his heart not to defile himself with the king's food. God honours his faithfulness: he ends up healthier and wiser than all the others."
+  },
+  "quote": "Daniel prit la ferme décision de ne pas se souiller en consommant les plats servis à la table du roi et le vin de ses banquets.",
+  "quoteRef": "Daniel 1:8"
+ },
+ {
+  "theme": "exemples",
+  "ref": "Juges 16",
+  "url": "https://bible.com/bible/152/jdg.16.S21",
+  "title": {
+   "fr": "Samson et Dalila",
+   "en": "Samson and Delilah"
+  },
+  "summary": {
+   "fr": "Samson, doté d'une force immense, se laisse séduire et finit par livrer le secret de sa force à Dalila. Il perd sa force, sa liberté et la vue : un avertissement sur le danger de jouer avec la tentation.",
+   "en": "Samson, gifted with immense strength, lets himself be seduced and finally gives away the secret of his strength to Delilah. He loses his strength, his freedom and his sight: a warning about playing with temptation."
+  },
+  "quote": "Il se réveilla et dit: «Je m'en tirerai comme les autres fois, je me dégagerai.» Il ne savait pas que l'Eternel s'était retiré de lui.",
+  "quoteRef": "Juges 16:20"
+ },
+ {
+  "theme": "exemples",
+  "ref": "Proverbes 7",
+  "url": "https://bible.com/bible/152/pro.7.S21",
+  "title": {
+   "fr": "Le jeune homme imprudent",
+   "en": "The naive young man"
+  },
+  "summary": {
+   "fr": "Un père décrit un jeune homme sans jugement qui se promène là où la tentation l'attend, et qui se laisse entraîner « comme un bœuf qui va à l'abattoir ». La leçon : ne pas même s'approcher du chemin.",
+   "en": "A father describes a young man lacking sense who wanders where temptation waits, and who is led away \"like an ox going to the slaughter\". The lesson: don't even go near that path."
+  },
+  "quote": "Que ton cœur ne se tourne pas vers les voies d'une telle femme! Ne t'égare pas dans ses sentiers!",
+  "quoteRef": "Proverbes 7:25"
+ },
+ {
   "theme": "grace",
   "ref": "Psaume 51:12",
   "url": "https://bible.com/bible/152/psa.51.12.S21",
@@ -781,6 +944,24 @@
   "ref": "1 Jean 1:9",
   "url": "https://bible.com/bible/152/1jn.1.9.S21",
   "text": "Si nous reconnaissons nos péchés, il est fidèle et juste pour nous les pardonner et pour nous purifier de tout mal."
+ },
+ {
+  "theme": "grace",
+  "ref": "Proverbes 28:13",
+  "url": "https://bible.com/bible/152/pro.28.13.S21",
+  "text": "Celui qui cache ses transgressions ne réussira pas, mais on aura compassion de celui qui les reconnaît et les abandonne."
+ },
+ {
+  "theme": "grace",
+  "ref": "Romains 8:1",
+  "url": "https://bible.com/bible/152/rom.8.1.S21",
+  "text": "Il n'y a donc maintenant aucune condamnation pour ceux qui sont en Jésus-Christ, [qui ne vivent pas conformément à leur nature propre mais conformément à l'Esprit]."
+ },
+ {
+  "theme": "grace",
+  "ref": "Esaïe 1:18",
+  "url": "https://bible.com/bible/152/isa.1.18.S21",
+  "text": "Venez et discutons! dit l'Eternel. Même si vos péchés sont couleur cramoisi, ils deviendront blancs comme la neige; même s'ils sont rouges comme la pourpre, ils deviendront clairs comme la laine."
  }
 ];
   var THEMES = ["all", "fuir", "temple", "maitrise", "combat", "exemples", "grace"];
@@ -823,6 +1004,22 @@
     box.appendChild(verseFoot(d)); box.appendChild(next);
   }
 
+  var SHOWN = 3, expanded = {};
+  function verseCard(d) {
+    var card = el("article", "card verse");
+    card.appendChild(el("span", "tag", T[lang].themes[d.theme]));
+    if (d.title) {
+      card.appendChild(el("h3", null, d.title[lang]));
+      card.appendChild(el("p", "summary", d.summary[lang]));
+      var q = el("blockquote", null, qt(d.quote));
+      q.appendChild(el("br")); var sm = el("small", "ref", "— " + d.quoteRef + " S21"); sm.style.fontSize = "12px"; q.appendChild(sm);
+      card.appendChild(q);
+    } else {
+      card.appendChild(el("blockquote", null, qt(d.text)));
+    }
+    card.appendChild(verseFoot(d));
+    return card;
+  }
   function renderVerses() {
     var t = $("themes"); t.textContent = "";
     THEMES.forEach(function (k) {
@@ -832,24 +1029,22 @@
       t.appendChild(b);
     });
     var list = $("verses"); list.textContent = "";
-    VERSES.forEach(function (d) {
-      if (theme !== "all" && d.theme !== theme) return;
-      var card = el("article", "card verse");
-      card.appendChild(el("span", "tag", T[lang].themes[d.theme]));
-      if (d.title) {
-        card.appendChild(el("h3", null, d.title[lang]));
-        card.appendChild(el("p", "summary", d.summary[lang]));
-        var q = el("blockquote", null, qt(d.quote));
-        q.appendChild(el("br")); var s = el("small", "ref", "— " + d.quoteRef + " S21"); s.style.fontSize = "12px"; q.appendChild(s);
-        card.appendChild(q);
-      } else {
-        card.appendChild(el("blockquote", null, qt(d.text)));
-      }
-      card.appendChild(verseFoot(d));
-      list.appendChild(card);
+    // Liste simple (tous thèmes confondus ou thème choisi) : 3 passages, puis « Voir le reste »
+    var items = VERSES.filter(function (d) { return theme === "all" || d.theme === theme; });
+    items.forEach(function (d, i) {
+      if (i < SHOWN || expanded[theme]) list.appendChild(verseCard(d));
     });
+    if (items.length > SHOWN) {
+      var more = el("button", "secondary more", expanded[theme] ? T[lang].less : T[lang].more + " (" + (items.length - SHOWN) + ")");
+      more.type = "button";
+      more.addEventListener("click", function () {
+        var wasOpen = expanded[theme];
+        expanded[theme] = !wasOpen; renderVerses();
+        if (wasOpen) $("themes").scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      list.appendChild(more);
+    }
   }
-
 
   // ---- Guide de démarrage
   var GUIDE = [
